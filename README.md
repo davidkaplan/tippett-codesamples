@@ -4,6 +4,12 @@ tippett
 Code samples from my work at Tippett Studio (2011-2013).
 
 
+=========
+TipPolyRotate
+=========
+This Maya plugin provides a means for rotating a polygon's vertex order.  Without modifying the vertices themselves, the plugin modifies the order in which the vertices define the topology of the polygon.  This is useful for certain shaders which require polygon topology to be oriented consistently with neighboring geometry.
+
+
 =======
 animLib
 =======
@@ -17,6 +23,6 @@ This playblast tool replaced Maya's default playblast functionality.  The signif
 
 
 =========
-TipPolyRotate
+podPublish
 =========
-This Maya plugin provides a means for rotating a polygon's vertex order.  Without modifying the vertices themselves, the plugin modifies the order in which the vertices define the topology of the polygon.  This is useful for certain shaders which require polygon topology to be oriented consistently with neighboring geometry.
+Pod is a container file format that Tippett uses for geometry caching.  Several plugins were written for publishing pods of different geometry types.  Here, a plugin script publishes a pod of FxRib type by validating the data, ascertaining dependencies, modifying the data in the pod nodes and dependencies, and moving those files to a locked-down area on disk.

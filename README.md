@@ -14,3 +14,9 @@ animLib is an animation library instancing tool that I wrote for Breaking Dawn P
 playblast
 =========
 This playblast tool replaced Maya's default playblast functionality.  The significant advantage of this tool is the ability to send playblast jobs to farm machines and batch the frames.  The tool consists of a user interface, and methods to create the farm job, and run the playblasts from display-less farm machines.
+
+
+=========
+TipPolyRotate
+=========
+This Maya plugin provides a means for rotating a polygon's vertex order.  Without modifying the vertices themselves, the plugin modifies the order in which the vertices define the topology of the polygon.  This is useful for certain shaders which require polygon topology to be oriented consistently with neighboring geometry.

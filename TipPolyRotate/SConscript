@@ -1,0 +1,46 @@
+import tip.build.tipscons
+from tip.build.tipscons import STATIC, SHARED
+
+SOURCE_FILES = [ 'TipPolyRotate.cpp', 
+                 'pluginMain.cpp' ]
+
+Import('env')
+
+envMaya = env.Clone( tools=['maya', 'ilmbase'] )
+envMaya.AppendUnique( CPPPATH=["."] )
+envMaya['STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME']=1
+
+envMaya.AppendUnique(LIBS=['OpenMaya',
+                           'OpenMayaAnim',
+                           'OpenMayaFX',
+                           'OpenMayaUI',
+
+                           ('Half-gcc41', STATIC),
+                           ('Imath-gcc41', STATIC),
+                           ('Iex-gcc41', STATIC),
+                           ('IlmImf-gcc41', STATIC),
+                           ('IlmThread-gcc41', STATIC),
+                           ] )
+
+
+# Autotag with the version number
+versionTag = Command( 'svnversion.txt', None, tip.build.tipscons.makeVersionTag )
+AlwaysBuild( versionTag )
+version_TipPolyRotate = Command("TipPolyRotate_version.cpp", 
+                             versionTag,
+                             tip.build.tipscons.makeVersionEmbed)
+Depends(version_TipPolyRotate, versionTag)
+
+
+plugin_TipPolyRotate = envMaya.SharedLibrary('TipPolyRotate',
+                                          SOURCE_FILES + [version_TipPolyRotate],
+                                          SHLIBPREFIX='')
+
+# Export TipPolyRotate
+exportDir = tip.build.tipscons.getExportDir("bin")
+exp_TipPolyRotate = Install(exportDir, plugin_TipPolyRotate)
+
+Default(exp_TipPolyRotate)
+Alias('TipPolyRotate', [exp_TipPolyRotate])
+
+Return('exp_TipPolyRotate')

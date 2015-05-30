@@ -1,4 +1,4 @@
-tippett
+VFX Pipeline Code Samples
 =======
 
 Code samples from my work at Tippett Studio (2011-2013).
